@@ -162,34 +162,34 @@ public class ImageLoader {
 //        }
 
         String str_output_path = picturesDir + "/" + filename;
-        Bitmap bitmap = decodeSampledBitmapFromFilepath(str_tmp_path, 400, 4096);
-        File file_output = new File(str_output_path);
-        if(!file_output.getParentFile().isDirectory())
-            file_output.getParentFile().mkdirs();
-        FileOutputStream output = null;
+        copyFile(str_tmp_path,str_output_path);
+        Bitmap bitmap = decodeSampledBitmapFromFilepath(str_tmp_path, 400, 2048);
+//        File file_output = new File(str_output_path);
+//        if(!file_output.getParentFile().isDirectory())
+//            file_output.getParentFile().mkdirs();
+//        FileOutputStream output = null;
 //            Thumbnails.of(srcFile)
 //                    .size(600, 4096);
-//        copyFile(str_tmp_path,str_output_path);
 //        srcFile.delete();
 //        return new BitmapDrawable(context.getResources(), bitmap);
-        try {
-            output = new FileOutputStream(file_output);
-            if (bitmap.compress(Bitmap.CompressFormat.JPEG, 90, output))
+//        try {
+//            output = new FileOutputStream(file_output);
+//            if (bitmap.compress(Bitmap.CompressFormat.JPEG, 90, output))
                 return new BitmapDrawable(context.getResources(), bitmap);
-            else
-                return null;
-        } catch (IOException e) {
-            Log.d(TAG, "Exception writing rounded avatar", e);
-            return null;
-        } finally {
-            if (output != null)
-                try {
-                    output.close();
-                } catch (IOException e) {
-                    // Ignored
-                }
-            srcFile.delete();
-        }
+//            else
+//                return null;
+//        } catch (IOException e) {
+//            Log.d(TAG, "Exception writing rounded avatar", e);
+//            return null;
+//        } finally {
+//            if (output != null)
+//                try {
+//                    output.close();
+//                } catch (IOException e) {
+//                    // Ignored
+//                }
+//            srcFile.delete();
+//        }
 
 //        return new BitmapDrawable(context.getResources(), bitmap);
     }
@@ -250,79 +250,45 @@ public class ImageLoader {
         return this;
     }
 
-//    private void copyFile(String srFile, String dtFile){
-//        try{
-//            File f1 = new File(srFile);
-//            File f2 = new File(dtFile);
-//            InputStream in = new FileInputStream(f1);
-//            OutputStream out = new FileOutputStream(f2);
-//
-//            byte[] buf = new byte[8192];
-//            int len;
-//            while ((len = in.read(buf)) > 0){
-//                out.write(buf, 0, len);
-//            }
-//            in.close();
-//            out.close();
-//        }
-//        catch(FileNotFoundException ex){
-//            String x=ex.getMessage();
-//            Log.d("FileNotFoundException", x);
-//        }
-//        catch(IOException ex){
-//            String x=ex.getMessage();
-//            Log.d("IOException", x);
-//        }
-//    }
+    private void copyFile(String srFile, String dtFile){
+        try{
+            File f1 = new File(srFile);
+            File f2 = new File(dtFile);
+            InputStream in = new FileInputStream(f1);
+            OutputStream out = new FileOutputStream(f2);
+
+            byte[] buf = new byte[8192];
+            int len;
+            while ((len = in.read(buf)) > 0){
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
+        }
+        catch(FileNotFoundException ex){
+            String x=ex.getMessage();
+            Log.d("FileNotFoundException", x);
+        }
+        catch(IOException ex){
+            String x=ex.getMessage();
+            Log.d("IOException", x);
+        }
+    }
+
+    public String getFileFullPath(String url){
+        return picturesDir + "/" + getFileName(url);
+    }
 
     public static String getFileName(String url) {
         String filename = "";
-//        boolean isok = false;
-        // 从UrlConnection中获取文件名称
-//        try {
-//            URL myURL = new URL(url);
-
-//            URLConnection conn = myURL.openConnection();
-//            if (conn == null) {
-//                return null;
-//            }
-//            Map<String, List<String>> hf = conn.getHeaderFields();
-//            if (hf == null) {
-//                return null;
-//            }
-//            Set<String> key = hf.keySet();
-//            if (key == null) {
-//                return null;
-//            }
-//
-//            for (String skey : key) {
-//                List<String> values = hf.get(skey);
-//                for (String value : values) {
         String result;
-//                    try {
-//                        result = new String(value.getBytes("ISO-8859-1"), "GBK");
         int location = url.lastIndexOf("/");
         if (location >= 0) {
             result = url.substring(location
                     + 1);
             filename = result
                     .substring(result.indexOf("=") + 1);
-//                            isok = true;
         }
-//                    } catch (UnsupportedEncodingException e) {
-//                        e.printStackTrace();
-//                    }// ISO-8859-1 UTF-8 gb2312
-//                }
-//                if (isok) {
-//                    break;
-//                }
-//            }
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        // 从路径中获取
         if (filename == null || "".equals(filename)) {
             filename = url.substring(url.lastIndexOf("/") + 1);
         }

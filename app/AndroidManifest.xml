@@ -116,21 +116,8 @@
         <activity
                 android:name=".ui.ActivitySettings"
                 />
-
-        <activity
-                android:name=".ui.ActivityContact"
-                />
-        <activity
-                android:name=".ui.ActivityCommodity"
-                />
-        <activity
-                android:name=".ui.ActivityChatMessage"
-                />
         <activity
                 android:name=".ui.ActivityLogin"
-                />
-        <activity
-                android:name=".ui.ActivityChatMessages"
                 />
         <activity
                 android:name=".ui.ActivityReg"
@@ -146,6 +133,7 @@
                 />
         <activity android:name=".ui.ActiveImage"/>
         <activity android:name=".ui.ActiveVideo"/>
+        <activity android:name=".ui.ActiveGif"/>
         <!--<service-->
                 <!--android:name=".service.ProblemsService"-->
                 <!--android:process=":message" >-->

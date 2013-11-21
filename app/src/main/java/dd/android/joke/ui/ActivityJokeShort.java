@@ -124,7 +124,12 @@ public class ActivityJokeShort extends
         if(joke.isVideo())
             startActivity(new Intent(this, ActiveVideo.class).putExtra(JOKE,joke));
         else if(joke.isImage())
-            startActivity(new Intent(this, ActiveImage.class).putExtra(JOKE,joke));
+        {
+//            if(joke.isGif())
+//                startActivity(new Intent(this, ActiveGif.class).putExtra(JOKE,joke));
+//            else
+                startActivity(new Intent(this, ActiveImage.class).putExtra(JOKE,joke));
+        }
 
     }
 
