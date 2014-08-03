@@ -4,13 +4,10 @@ package dd.android.joke.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import com.costum.android.widget.LoadMoreListView;
-import com.github.kevinsawicki.wishlist.Toaster;
+import android.widget.Toast;
 import com.google.inject.Inject;
+import com.mindpin.android.pinterestlistview.PinterestListView;
+import com.mindpin.android.pinterestlistview.internal.PLA_AdapterView;
 import dd.android.joke.R;
 import dd.android.joke.core.ImageLoader;
 import dd.android.joke.core.Joke;
@@ -21,7 +18,7 @@ import roboguice.util.RoboAsyncTask;
 import java.util.ArrayList;
 import java.util.List;
 
-import static dd.android.joke.core.Constants.Extra.*;
+import static dd.android.joke.core.Constants.Extra.JOKE;
 
 /**
  * Activity to authenticate the ABUser against an API (example API on Parse.com)
@@ -32,31 +29,38 @@ public class ActivityJokeShort extends
     static String _TYPE = "short";
     List<Joke> jokes = new ArrayList<Joke>();
 
-    @InjectView(R.id.lv_list)
-    private LoadMoreListView lv_list;
+    @InjectView(R.id.list)
+    private PinterestListView list;
     @Inject
     private ImageLoader avatars;
     AdapterJokes adapter = null;
-    int page = 1,pass_page = 0;
+    int page = 1, pass_page = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);    //To change body of overridden methods use File | Settings | File Templates.
-        setContentView(R.layout.act_commodities);
+        setContentView(R.layout.list);
 
-        lv_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list.setOnItemClickListener(new PLA_AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                onListItemClick((LoadMoreListView) parent, view, position, id);
+            public void onItemClick(PLA_AdapterView<?> parent, View view, int position, long id) {
+                onListItemClick(parent, view, position, id);
             }
         });
-        lv_list.setOnLoadMoreListener(
-                new LoadMoreListView.OnLoadMoreListener() {
+
+        list.set_on_refresh_listener(new PinterestListView.OnRefreshListener() {
+            @Override
+            public void on_refresh() {
+                refreshPage();
+            }
+        });
+
+        list.set_on_load_more_listener(
+                new PinterestListView.OnLoadMoreListener() {
                     @Override
-                    public void onLoadMore() {
+                    public void on_load_more() {
                         getNextPage();
                     }
                 }
@@ -87,8 +91,8 @@ public class ActivityJokeShort extends
                 List<Joke> get_commodities = ServiceYS.getJokes(_TYPE, page);
                 if (page > 1 && get_commodities != null && get_commodities.size() == 0) {
                     page--;
-                    lv_list.setOnLoadMoreListener(null);
-                    Toaster.showLong(ActivityJokeShort.this, "没有数据了。");
+                    list.set_on_load_more_listener(null);
+                    Toast.makeText(ActivityJokeShort.this, "没有数据了。", Toast.LENGTH_LONG);
                 } else
                     addJokes(get_commodities);
                 return true;
@@ -97,7 +101,7 @@ public class ActivityJokeShort extends
             @Override
             protected void onException(Exception e) throws RuntimeException {
                 e.printStackTrace();
-                Toaster.showLong(ActivityJokeShort.this, "获取信息失败");
+                Toast.makeText(ActivityJokeShort.this, "获取信息失败", Toast.LENGTH_LONG);
             }
 
             @Override
@@ -108,7 +112,7 @@ public class ActivityJokeShort extends
             @Override
             protected void onFinally() throws RuntimeException {
                 progressDialogDismiss();
-                lv_list.onLoadMoreComplete();
+                list.on_load_more_complete();
             }
         }.execute();
     }
@@ -119,30 +123,26 @@ public class ActivityJokeShort extends
         jokes.addAll(get_commodities);
     }
 
-    public void onListItemClick(LoadMoreListView l, View v, int position, long id) {
+    public void onListItemClick(PLA_AdapterView l, View v, int position, long id) {
         Joke joke = ((Joke) l.getItemAtPosition(position));
-        if(joke.isVideo())
-            startActivity(new Intent(this, ActiveVideo.class).putExtra(JOKE,joke));
-        else if(joke.isImage())
-        {
+        if (joke.isVideo())
+            startActivity(new Intent(this, ActiveVideo.class).putExtra(JOKE, joke));
+        else if (joke.isImage()) {
 //            if(joke.isGif())
 //                startActivity(new Intent(this, ActiveGif.class).putExtra(JOKE,joke));
 //            else
-                startActivity(new Intent(this, ActiveImage.class).putExtra(JOKE,joke));
+            startActivity(new Intent(this, ActiveImage.class).putExtra(JOKE, joke));
         }
 
     }
 
     private void commodities_to_list() {
-        if(adapter == null)
-        {
+        if (adapter == null) {
             adapter = new AdapterJokes(
                     getLayoutInflater(), jokes,
                     avatars);
-            lv_list.setAdapter(adapter);
-        }
-        else
-        {
+            list.setAdapter(adapter);
+        } else {
             adapter.setItems(jokes);
             adapter.notifyDataSetChanged();
         }

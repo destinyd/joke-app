@@ -7,14 +7,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
-import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
-import android.widget.*;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import com.alibaba.fastjson.JSON;
 import com.github.kevinsawicki.http.HttpRequest;
@@ -22,7 +23,6 @@ import com.github.kevinsawicki.wishlist.Toaster;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockAccountAuthenticatorActivity;
 import dd.android.joke.R;
 import dd.android.joke.core.*;
-import dd.android.joke.service.NotificationFayeService;
 import roboguice.inject.InjectView;
 import roboguice.util.Ln;
 import roboguice.util.RoboAsyncTask;
@@ -33,7 +33,6 @@ import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
 import static com.github.kevinsawicki.http.HttpRequest.post;
 import static dd.android.joke.core.Constants.Http.*;
-import static dd.android.joke.core.Constants.Extra.*;
 
 /**
  * Activity to authenticate the ABUser against an API (example API on Parse.com)
@@ -328,7 +327,6 @@ public class ActivityLogin extends
         {
             Settings.getFactory().setUser(result);
             PropertiesController.writeConfiguration();
-            startService(new Intent(this, NotificationFayeService.class).putExtra(NAME, result.getName()));
         }
         else {
             Toaster.showLong(ActivityLogin.this,

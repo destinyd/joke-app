@@ -102,11 +102,11 @@ public class Joke implements Serializable {
     }
 
     public Boolean isImage(){
-        return getImgurl() != null && !getImgurl().isEmpty();
+        return getImgurl() != null && !getImgurl().equals("");
     }
 
     public Boolean isVideo(){
-        return getVideourl() != null && !getVideourl().isEmpty();
+        return getVideourl() != null && !getVideourl().equals("");
     }
 
     public Boolean isGif(){

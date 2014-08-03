@@ -2,10 +2,7 @@
 package dd.android.joke.ui;
 
 import android.view.LayoutInflater;
-import com.actionbarsherlock.R.color;
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
-
-import dd.android.joke.R.drawable;
 
 import java.util.List;
 
@@ -17,9 +14,9 @@ import java.util.List;
 public abstract class AdapterAlternatingColorList<V> extends
         SingleTypeAdapter<V> {
 
-    private final int primaryResource;
-
-    private final int secondaryResource;
+//    private final int primaryResource;
+//
+//    private final int secondaryResource;
 
     /**
      * Create adapter with alternating row colors
@@ -45,22 +42,22 @@ public abstract class AdapterAlternatingColorList<V> extends
                                        LayoutInflater inflater, final List<V> items, boolean selectable) {
         super(inflater, layoutId);
 
-        if (selectable) {
-            primaryResource = drawable.table_background_selector;
-            secondaryResource = drawable.table_background_alternate_selector;
-        } else {
-            primaryResource = color.pager_background;
-            secondaryResource = color.pager_background_alternate;
-        }
+////        if (selectable) {
+//            primaryResource = drawable.table_background_selector;
+//            secondaryResource = drawable.table_background_alternate_selector;
+////        } else {
+////            primaryResource = color.pager_background;
+////            secondaryResource = color.pager_background_alternate;
+////        }
 
         setItems(items);
     }
 
     @Override
     protected void update(final int position, final V item) {
-        if (position % 2 != 0)
-            updater.view.setBackgroundResource(primaryResource);
-        else
-            updater.view.setBackgroundResource(secondaryResource);
+//        if (position % 2 != 0)
+//            updater.view.setBackgroundResource(primaryResource);
+//        else
+//            updater.view.setBackgroundResource(secondaryResource);
     }
 }

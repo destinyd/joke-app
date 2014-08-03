@@ -22,11 +22,8 @@ import com.github.kevinsawicki.wishlist.Toaster;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockAccountAuthenticatorActivity;
 import dd.android.joke.R;
 import dd.android.joke.core.*;
-import dd.android.joke.service.NotificationFayeService;
 import roboguice.inject.InjectView;
-import roboguice.util.Ln;
 import roboguice.util.RoboAsyncTask;
-import roboguice.util.Strings;
 
 import java.util.Map;
 
@@ -327,7 +324,6 @@ public class ActivityReg extends
         {
             Settings.getFactory().setUser(result);
             PropertiesController.writeConfiguration();
-            startService(new Intent(this, NotificationFayeService.class).putExtra(NAME, result.getName()));
         }
         else {
             Toaster.showLong(ActivityReg.this,

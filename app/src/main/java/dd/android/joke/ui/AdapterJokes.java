@@ -7,6 +7,7 @@ import dd.android.common.PrettyDateFormat;
 import dd.android.joke.R;
 import dd.android.joke.core.ImageLoader;
 import dd.android.joke.core.Joke;
+import pl.droidsonroids.gif.GifImageView;
 
 import java.util.List;
 
@@ -51,7 +52,10 @@ public class AdapterJokes extends AdapterAlternatingColorList<Joke> {
         setGone(5, true);
 
         if(joke.isVideo() || joke.isImage()){
-            avatars.bind(imageView(3), joke);
+//            if(joke.isGif())
+//                avatars.bind_gif((GifImageView) imageView(3), joke);
+//            else
+                avatars.bind(imageView(3), joke);
         }
 
         if(joke.isVideo())
@@ -63,8 +67,7 @@ public class AdapterJokes extends AdapterAlternatingColorList<Joke> {
             if(joke.isGif())
                 setGone(4, false);
         }
-
-
-
     }
+
+
 }

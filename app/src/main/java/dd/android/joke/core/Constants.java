@@ -61,7 +61,7 @@ public class Constants {
         }
 
 
-        public static final String URL_BASE = "http://192.168.1.4:3008";
+        public static final String URL_BASE = "http://192.168.0.8:3008";
 
 //        public static final String URL_ADMIN_BASE = URL_BASE + "/xiaofengxiaomi";
 

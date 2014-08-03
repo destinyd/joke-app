@@ -13,67 +13,22 @@
     <packaging>apk</packaging>
     <name>Joke app</name>
 
-    <properties>
-        <abs.version>4.2.0</abs.version>
-    </properties>
     <dependencies>
         <dependency>
-            <groupId>com.google.android</groupId>
+            <groupId>android</groupId>
             <artifactId>android</artifactId>
+            <version>${platform.version}</version>
             <scope>provided</scope>
-            <version>${android.version}</version>
         </dependency>
         <!--<dependency>-->
-        <!--<groupId>com.google.android.maps</groupId>-->
-        <!--<artifactId>maps</artifactId>-->
-        <!--<version>17_r1</version>-->
-        <!--<scope>provided</scope>-->
+            <!--<groupId>android.support</groupId>-->
+            <!--<artifactId>compatibility-v4</artifactId>-->
+            <!--<version>${compatibility-v4.version}</version>-->
         <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.google.android.maps</groupId>-->
-        <!--<artifactId>maps</artifactId>-->
-        <!--<version>16_r3</version>-->
-        <!--<scope>jar</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.google.android.maps</groupId>-->
-        <!--<artifactId>maps</artifactId>-->
-        <!--<version>16_r3</version>-->
-        <!--<scope>apklib</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.google.android.maps</groupId>-->
-        <!--<artifactId>maps</artifactId>-->
-        <!--<version>16_r3</version>-->
-        <!--<scope>jar</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.google.android.gms</groupId>-->
-        <!--<artifactId>google-play-services</artifactId>-->
-        <!--<version>4</version>-->
-        <!--<type>apklib</type>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.google.android.gms</groupId>-->
-        <!--<artifactId>google-play-services</artifactId>-->
-        <!--<version>4</version>-->
-        <!--<type>jar</type>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>com.saulpower.fayeclient</groupId>
-            <artifactId>library</artifactId>
-            <version>1.1</version>
-        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.1.27</version>
-        </dependency>
-        <dependency>
-            <groupId>com.slidingmenu</groupId>
-            <artifactId>library</artifactId>
-            <version>1.2</version>
-            <type>apklib</type>
         </dependency>
         <dependency>
             <groupId>com.github.rtyley</groupId>
@@ -81,21 +36,9 @@
             <version>1.4</version>
         </dependency>
         <dependency>
-            <groupId>com.github.chrisbanes.pulltorefresh</groupId>
-            <artifactId>library</artifactId>
-            <version>2.1.1</version>
-            <type>apklib</type>
-        </dependency>
-        <!--<dependency>-->
-        <!--<groupId>com.github.chrisbanes.pulltorefresh</groupId>-->
-        <!--<artifactId>extra-viewpager</artifactId>-->
-        <!--<version>2.1.1</version>-->
-        <!--<type>apklib</type>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>com.costum</groupId>
-            <artifactId>loadmorelistview</artifactId>
-            <version>0.1.0</version>
+            <groupId>com.mindpin.android.pinterestlistview</groupId>
+            <artifactId>pinterestlistview</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
             <type>apklib</type>
         </dependency>
         <dependency>
@@ -105,28 +48,27 @@
         </dependency>
         <dependency>
             <groupId>com.actionbarsherlock</groupId>
-            <artifactId>library</artifactId>
+            <artifactId>actionbarsherlock</artifactId>
             <version>${abs.version}</version>
             <type>apklib</type>
         </dependency>
         <dependency>
-            <groupId>com.actionbarsherlock</groupId>
-            <artifactId>library</artifactId>
-            <version>${abs.version}</version>
-            <type>jar</type>
-            <scope>provided</scope>
+            <groupId>com.github.destinyd.kcextraimageview</groupId>
+            <artifactId>kcextraimageview</artifactId>
+            <version>0.1.0</version>
+            <type>apklib</type>
         </dependency>
         <dependency>
             <groupId>com.github.kevinsawicki</groupId>
             <artifactId>http-request</artifactId>
             <version>4.2</version>
         </dependency>
-        <dependency>
-            <groupId>com.viewpagerindicator</groupId>
-            <artifactId>library</artifactId>
-            <version>2.4.1</version>
-            <type>apklib</type>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.viewpagerindicator</groupId>-->
+        <!--<artifactId>library</artifactId>-->
+        <!--<version>2.4.1</version>-->
+        <!--<type>apklib</type>-->
+        <!--</dependency>-->
         <!--<dependency>-->
         <!--<groupId>com.nineoldandroids</groupId>-->
         <!--<artifactId>library</artifactId>-->
@@ -142,6 +84,12 @@
             <artifactId>wishlist</artifactId>
             <version>0.8</version>
             <type>apklib</type>
+        </dependency>
+        <dependency>
+            <groupId>pl.droidsonroids.gif</groupId>
+            <artifactId>android-gif-drawable</artifactId>
+            <version>1.0.8</version>
+            <type>aar</type>
         </dependency>
         <!--<dependency>-->
         <!--<groupId>junit</groupId>-->
@@ -161,23 +109,44 @@
         <!--<version>1.9.0</version>-->
         <!--<scope>test</scope>-->
         <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>com.github.destinyd</groupId>-->
+        <!--<artifactId>kcflip</artifactId>-->
+        <!--<version>0.0.1-SNAPSHOT</version>-->
+        <!--<type>apklib</type>-->
+        <!--</dependency>-->
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                 <artifactId>android-maven-plugin</artifactId>
+                <extensions>true</extensions>
             </plugin>
+
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>
+
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                    <artifactId>android-maven-plugin</artifactId>
+                    <version>${android.plugin.version}</version>
+                    <extensions>true</extensions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
+
     <profiles>
         <profile>
             <id>release</id>
@@ -205,7 +174,7 @@
                                 <inherited>true</inherited>
                                 <configuration>
                                     <removeExistingSignatures>true</removeExistingSignatures>
-                                    <archiveDirectory />
+                                    <archiveDirectory/>
                                     <!-- These values can either be placed directly into to file below, or provided
                                     via the command line during the build process as such:
                                      "mvn clean release -Dbootstrap.sign.keystore=foobar" ... etc.
@@ -232,7 +201,9 @@
                             </sign>
                             <zipalign>
                                 <verbose>true</verbose>
-                                <outputApk>${project.build.directory}/${project.artifactId}-${project.version}-signed-aligned.apk</outputApk>
+                                <outputApk>
+                                    ${project.build.directory}/${project.artifactId}-${project.version}-signed-aligned.apk
+                                </outputApk>
                             </zipalign>
                             <manifest>
                                 <debuggable>false</debuggable>

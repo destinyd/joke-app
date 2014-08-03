@@ -4,11 +4,12 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:orientation="vertical">
-    <com.costum.android.widget.LoadMoreListView
+    <com.mindpin.android.pinterestlistview.PinterestListView
+            xmlns:waterfall="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/lv_list"
-            style="@style/ListView"
-            android:visibility="visible"
+            waterfall:plaColumnNumber="1"
+            waterfall:plaLandscapeColumnNumber="2"
             />
 </LinearLayout>

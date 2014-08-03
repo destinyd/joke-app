@@ -12,6 +12,8 @@ import com.github.kevinsawicki.http.HttpRequest;
 import com.google.inject.Inject;
 import dd.android.common.SDCard;
 import dd.android.joke.R;
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
 import roboguice.util.RoboAsyncTask;
 
 import java.io.*;
@@ -60,7 +62,7 @@ public class ImageLoader {
 
         @Override
         protected boolean removeEldestEntry(
-                Entry<Object, BitmapDrawable> eldest) {
+                Map.Entry<Object, BitmapDrawable> eldest) {
             return size() >= CACHE_SIZE;
         }
     };
@@ -163,7 +165,8 @@ public class ImageLoader {
 
         String str_output_path = picturesDir + "/" + filename;
         copyFile(str_tmp_path,str_output_path);
-        Bitmap bitmap = decodeSampledBitmapFromFilepath(str_tmp_path, 400, 2048);
+//        Bitmap bitmap = decodeSampledBitmapFromFilepath(str_tmp_path, 400, 2048);
+        Bitmap bitmap = decodeSampledBitmapFromFilepath(str_output_path, 400, 2048);
 //        File file_output = new File(str_output_path);
 //        if(!file_output.getParentFile().isDirectory())
 //            file_output.getParentFile().mkdirs();
@@ -209,7 +212,7 @@ public class ImageLoader {
 
     public ImageLoader bind(final ImageView view, final Joke joke) {//final String imgurl, final String pictureId) {
         final String imgurl = joke.getImgurl();
-        if (!(imgurl != null && !imgurl.isEmpty()))
+        if (!(imgurl != null && !imgurl.equals("")))
             return setImage(loadingAvatar, view);
 
         final String filename = getFileName(joke.getImgurl());
@@ -264,14 +267,15 @@ public class ImageLoader {
             }
             in.close();
             out.close();
+            f1.delete();
         }
         catch(FileNotFoundException ex){
             String x=ex.getMessage();
-            Log.d("FileNotFoundException", x);
+            Log.d("copyFile FileNotFoundException", x);
         }
         catch(IOException ex){
             String x=ex.getMessage();
-            Log.d("IOException", x);
+            Log.d("copyFile IOException", x);
         }
     }
 
@@ -323,6 +327,83 @@ public class ImageLoader {
         // 使用获取到的inSampleSize值再次解析图片
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeFile(filepath, options);
+    }
+
+    public ImageLoader bind_gif(final GifImageView view, final Joke joke) {//final String imgurl, final String pictureId) {
+        final String imgurl = joke.getImgurl();
+        if (!(imgurl != null && !imgurl.equals("")))
+            return setImage(loadingAvatar, view);
+
+        final String filename = getFileName(joke.getImgurl());
+
+        BitmapDrawable loadedImage = loaded.get(filename);
+        if (loadedImage != null) {
+            return setImage(loadedImage, view);
+        }
+
+        setImage(loadingAvatar, view, filename);
+
+        final String loadUrl = imgurl;
+        new FetchAvatarTask(context) {
+
+            @Override
+            public BitmapDrawable call() throws Exception {
+                if (!joke.isGif() && !filename.equals(view.getTag(R.id.iv_image)))
+                    return null;
+
+                final BitmapDrawable image = getImage(filename);
+                if (image != null)
+                    return image;
+                else
+                    return fetchAvatar(joke);
+            }
+
+            @Override
+            protected void onSuccess(final BitmapDrawable image)
+                    throws Exception {
+                if (image == null)
+                    return;
+                loaded.put(filename, image);
+                if (!joke.isGif() && filename.equals(view.getTag(R.id.iv_image)))
+                    setGif(filename, view);
+            }
+
+        }.execute();
+
+        return this;
+    }
+
+//    private ImageLoader setGif(final Drawable image, final GifImageView view) {
+//        return setImage(image, view, null);
+//    }
+//
+//    private ImageLoader setGif(final Drawable image, final GifImageView view,
+//                                 Object tag) {
+//        view.setImageDrawable(image);
+////        view.setTag(R.id.iv_image, tag);
+//        view.setVisibility(VISIBLE);
+//        GifDrawable gd = (GifDrawable)view.getDrawable().getCurrent();
+//        gd.start();
+//        return this;
+//    }
+
+    private ImageLoader setGif(final String image_url, final GifImageView view) {
+        GifDrawable gifFromPath = null;
+        String filename = picturesDir + "/" + image_url;
+        Log.d(TAG, "filename :" + filename);
+        File f = new File(filename);
+        Log.d(TAG, "new File(filename).exists():" + f.exists());
+        //file path
+        try {
+            gifFromPath = new GifDrawable(filename);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        view.setImageDrawable(gifFromPath);
+//        view.setTag(R.id.iv_image, tag);
+        view.setVisibility(VISIBLE);
+        gifFromPath.start();
+        return this;
     }
 }
 
