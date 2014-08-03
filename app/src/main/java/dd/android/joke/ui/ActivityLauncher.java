@@ -75,12 +75,12 @@ public class ActivityLauncher extends
 //        addTab("购物车", R.drawable.tab_search, ActivitySettings.class);
         addTab("有图",
 //                R.drawable.tab_contact,
-//                ActivityJokeImage.class);
-                ActivityJokeShort.class);
+                ActivityJokeImage.class);
+//                ActivityJokeShort.class);
         addTab("视频",
 //                R.drawable.tab_settings,
-//                ActivityJokeVideo.class);
-                ActivityJokeShort.class);
+                ActivityJokeVideo.class);
+//                ActivityJokeShort.class);
 //        addTab("长篇",
 ////                R.drawable.tab_home,
 //                ActivityJokeLong.class);
