@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import com.github.kevinsawicki.http.HttpRequest;
 import com.google.inject.Inject;
@@ -29,7 +30,7 @@ import static dd.android.joke.core.Constants.Setting.SDCARD_PATH;
 /**
  * Avatar utilities
  */
-public class ImageLoader {
+public class MyImageLoader {
 
     private static final String TAG = "ImageLoader";
 
@@ -81,7 +82,7 @@ public class ImageLoader {
      * @param context
      */
     @Inject
-    public ImageLoader(final Context context) {
+    public MyImageLoader(final Context context) {
 //        context.getCacheDir()
         this.context = context;
 
@@ -164,7 +165,7 @@ public class ImageLoader {
 //        }
 
         String str_output_path = picturesDir + "/" + filename;
-        copyFile(str_tmp_path,str_output_path);
+        copyFile(str_tmp_path, str_output_path);
 //        Bitmap bitmap = decodeSampledBitmapFromFilepath(str_tmp_path, 400, 2048);
         Bitmap bitmap = decodeSampledBitmapFromFilepath(str_output_path, 400, 2048);
 //        File file_output = new File(str_output_path);
@@ -178,7 +179,7 @@ public class ImageLoader {
 //        try {
 //            output = new FileOutputStream(file_output);
 //            if (bitmap.compress(Bitmap.CompressFormat.JPEG, 90, output))
-                return new BitmapDrawable(context.getResources(), bitmap);
+        return new BitmapDrawable(context.getResources(), bitmap);
 //            else
 //                return null;
 //        } catch (IOException e) {
@@ -198,19 +199,19 @@ public class ImageLoader {
     }
 
 
-    private ImageLoader setImage(final Drawable image, final ImageView view) {
+    private MyImageLoader setImage(final Drawable image, final ImageView view) {
         return setImage(image, view, null);
     }
 
-    private ImageLoader setImage(final Drawable image, final ImageView view,
-                                 Object tag) {
+    private MyImageLoader setImage(final Drawable image, final ImageView view,
+                                   Object tag) {
         view.setImageDrawable(image);
         view.setTag(R.id.iv_image, tag);
         view.setVisibility(VISIBLE);
         return this;
     }
 
-    public ImageLoader bind(final ImageView view, final Joke joke) {//final String imgurl, final String pictureId) {
+    public MyImageLoader bind(final ImageView view, final Joke joke) {//final String imgurl, final String pictureId) {
         final String imgurl = joke.getImgurl();
         if (!(imgurl != null && !imgurl.equals("")))
             return setImage(loadingAvatar, view);
@@ -253,8 +254,8 @@ public class ImageLoader {
         return this;
     }
 
-    private void copyFile(String srFile, String dtFile){
-        try{
+    private void copyFile(String srFile, String dtFile) {
+        try {
             File f1 = new File(srFile);
             File f2 = new File(dtFile);
             InputStream in = new FileInputStream(f1);
@@ -262,24 +263,22 @@ public class ImageLoader {
 
             byte[] buf = new byte[8192];
             int len;
-            while ((len = in.read(buf)) > 0){
+            while ((len = in.read(buf)) > 0) {
                 out.write(buf, 0, len);
             }
             in.close();
             out.close();
             f1.delete();
-        }
-        catch(FileNotFoundException ex){
-            String x=ex.getMessage();
+        } catch (FileNotFoundException ex) {
+            String x = ex.getMessage();
             Log.d("copyFile FileNotFoundException", x);
-        }
-        catch(IOException ex){
-            String x=ex.getMessage();
+        } catch (IOException ex) {
+            String x = ex.getMessage();
             Log.d("copyFile IOException", x);
         }
     }
 
-    public String getFileFullPath(String url){
+    public String getFileFullPath(String url) {
         return picturesDir + "/" + getFileName(url);
     }
 
@@ -329,7 +328,8 @@ public class ImageLoader {
         return BitmapFactory.decodeFile(filepath, options);
     }
 
-    public ImageLoader bind_gif(final GifImageView view, final Joke joke) {//final String imgurl, final String pictureId) {
+    public MyImageLoader bind_gif(final View v, final Joke joke) {//final String imgurl, final String pictureId) {
+        final GifImageView view = (GifImageView)v;
         final String imgurl = joke.getImgurl();
         if (!(imgurl != null && !imgurl.equals("")))
             return setImage(loadingAvatar, view);
@@ -348,9 +348,6 @@ public class ImageLoader {
 
             @Override
             public BitmapDrawable call() throws Exception {
-                if (!joke.isGif() && !filename.equals(view.getTag(R.id.iv_image)))
-                    return null;
-
                 final BitmapDrawable image = getImage(filename);
                 if (image != null)
                     return image;
@@ -364,8 +361,7 @@ public class ImageLoader {
                 if (image == null)
                     return;
                 loaded.put(filename, image);
-                if (!joke.isGif() && filename.equals(view.getTag(R.id.iv_image)))
-                    setGif(filename, view);
+                setGif(filename, view);
             }
 
         }.execute();
@@ -373,34 +369,15 @@ public class ImageLoader {
         return this;
     }
 
-//    private ImageLoader setGif(final Drawable image, final GifImageView view) {
-//        return setImage(image, view, null);
-//    }
-//
-//    private ImageLoader setGif(final Drawable image, final GifImageView view,
-//                                 Object tag) {
-//        view.setImageDrawable(image);
-////        view.setTag(R.id.iv_image, tag);
-//        view.setVisibility(VISIBLE);
-//        GifDrawable gd = (GifDrawable)view.getDrawable().getCurrent();
-//        gd.start();
-//        return this;
-//    }
-
-    private ImageLoader setGif(final String image_url, final GifImageView view) {
+    private MyImageLoader setGif(final String image_url, final GifImageView view) {
         GifDrawable gifFromPath = null;
         String filename = picturesDir + "/" + image_url;
-        Log.d(TAG, "filename :" + filename);
-        File f = new File(filename);
-        Log.d(TAG, "new File(filename).exists():" + f.exists());
-        //file path
         try {
             gifFromPath = new GifDrawable(filename);
         } catch (IOException e) {
             e.printStackTrace();
         }
         view.setImageDrawable(gifFromPath);
-//        view.setTag(R.id.iv_image, tag);
         view.setVisibility(VISIBLE);
         gifFromPath.start();
         return this;

@@ -9,7 +9,7 @@ import com.google.inject.Inject;
 import com.mindpin.android.pinterestlistview.PinterestListView;
 import com.mindpin.android.pinterestlistview.internal.PLA_AdapterView;
 import dd.android.joke.R;
-import dd.android.joke.core.ImageLoader;
+import dd.android.joke.core.MyImageLoader;
 import dd.android.joke.core.Joke;
 import dd.android.joke.core.ServiceYS;
 import roboguice.inject.InjectView;
@@ -32,7 +32,7 @@ public class ActivityJokeShort extends
     @InjectView(R.id.list)
     private PinterestListView list;
     @Inject
-    private ImageLoader avatars;
+    private MyImageLoader avatars;
     AdapterJokes adapter = null;
     int page = 1, pass_page = 0;
 
@@ -131,7 +131,7 @@ public class ActivityJokeShort extends
 //            if(joke.isGif())
 //                startActivity(new Intent(this, ActiveGif.class).putExtra(JOKE,joke));
 //            else
-            startActivity(new Intent(this, ActiveImage.class).putExtra(JOKE, joke));
+            startActivity(new Intent(this, ActivePhoto.class).putExtra(JOKE, joke));
         }
 
     }

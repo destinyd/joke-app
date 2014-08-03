@@ -1,20 +1,41 @@
 package dd.android.joke.ui;
 
+import android.graphics.Bitmap;
+import android.os.Handler;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import dd.android.common.PrettyDateFormat;
 import dd.android.joke.R;
-import dd.android.joke.core.ImageLoader;
+import dd.android.joke.core.MyImageLoader;
 import dd.android.joke.core.Joke;
 import pl.droidsonroids.gif.GifImageView;
 
 import java.util.List;
 
 public class AdapterJokes extends AdapterAlternatingColorList<Joke> {
-    private final ImageLoader avatars;
+    private final MyImageLoader avatars;
+    final static DisplayImageOptions options = new DisplayImageOptions.Builder()
+            .showImageOnLoading(R.drawable.gravatar_icon) // resource or drawable
+            .showImageForEmptyUri(R.drawable.gravatar_icon) // resource or drawable
+            .showImageOnFail(R.drawable.gravatar_icon) // resource or drawable
+            .resetViewBeforeLoading(false)  // default
+            .delayBeforeLoading(200)
+            .cacheOnDisk(true)
+            .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
+            .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+            .displayer(new SimpleBitmapDisplayer()) // default
+            .handler(new Handler()) // default
+            .build();
 
-    public AdapterJokes(LayoutInflater inflater, List<Joke> items, ImageLoader avatars) {
+    public AdapterJokes(LayoutInflater inflater, List<Joke> items, MyImageLoader avatars) {
         super(R.layout.item_joke,inflater,items);
         this.avatars = avatars;
     }
@@ -52,10 +73,9 @@ public class AdapterJokes extends AdapterAlternatingColorList<Joke> {
         setGone(5, true);
 
         if(joke.isVideo() || joke.isImage()){
-//            if(joke.isGif())
-//                avatars.bind_gif((GifImageView) imageView(3), joke);
-//            else
-                avatars.bind(imageView(3), joke);
+            ImageLoader.getInstance().displayImage(joke.getImgurl(), imageView(3), options);
+            setGone(3, false);
+//            ImageLoader.getInstance().loadImageSync(joke.getImgurl(), imageView(3), options);
         }
 
         if(joke.isVideo())
