@@ -27,10 +27,6 @@ public class ActivePhoto extends ActivityBase {
     @InjectExtra(JOKE)
     protected Joke joke;
 
-
-//    @InjectView(R.id.image)
-//    PhotoView image;
-
     @Inject
     private MyImageLoader avatars;
 
@@ -51,16 +47,14 @@ public class ActivePhoto extends ActivityBase {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (joke.isGif()) {
-            setContentView(R.layout.gif);
-            avatars.bind_gif(getImage(), joke);
+            GifImageView giv = new GifImageView(this);
+            setContentView(giv);
+            avatars.bind_gif(giv, joke);
         } else {
-            setContentView(R.layout.photo);
-            ImageLoader.getInstance().displayImage(joke.getImgurl(), getImage(), options);
+            PhotoView pv = new PhotoView(this);
+            setContentView(pv);
+            ImageLoader.getInstance().displayImage(joke.getImgurl(), pv, options);
             Toaster.showLong(this, "双手操作可以移动、放大、缩小");
         }
-    }
-
-    ImageView getImage() {
-        return (ImageView)findViewById(R.id.image);
     }
 }
