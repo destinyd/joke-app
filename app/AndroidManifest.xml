@@ -68,7 +68,9 @@
         <activity
                 android:name=".ui.ActivityJokeVideo"
                 />
-        <activity android:name=".ui.ActiveVideo"/>
+        <activity android:name=".ui.ActivityJokeLong"/>
+
+        <activity android:name=".ui.ActiveWeb"/>
         <activity android:name=".ui.ActivePhoto"/>
 
         <uses-library android:name="com.google.android.maps"

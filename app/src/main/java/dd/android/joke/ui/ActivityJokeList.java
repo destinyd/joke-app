@@ -24,8 +24,6 @@ import static dd.android.joke.core.Constants.Extra.JOKE;
  */
 public abstract class ActivityJokeList extends
         ActivityBase {
-
-    static String _TYPE = "video";
     List<Joke> jokes = new ArrayList<Joke>();
 
     @InjectView(R.id.list)
@@ -124,8 +122,8 @@ public abstract class ActivityJokeList extends
 
     public void onListItemClick(PLA_AdapterView l, View v, int position, long id) {
         Joke joke = ((Joke) l.getItemAtPosition(position));
-        if (joke.isVideo())
-            startActivity(new Intent(this, ActiveVideo.class).putExtra(JOKE, joke));
+        if (joke.isVideo() || joke.isLong())
+            startActivity(new Intent(this, ActiveWeb.class).putExtra(JOKE, joke));
         else if (joke.isImage()) {
             startActivity(new Intent(this, ActivePhoto.class).putExtra(JOKE, joke));
         }

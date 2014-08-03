@@ -9,6 +9,7 @@ import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
 import static dd.android.joke.core.Constants.Extra.JOKE;
+import static dd.android.joke.core.Constants.Http.FORMAT_URL_JOKE;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,7 +18,7 @@ import static dd.android.joke.core.Constants.Extra.JOKE;
  * Time: 下午7:29
  * To change this template use File | Settings | File Templates.
  */
-public class ActiveVideo extends ActivityBase {
+public class ActiveWeb extends ActivityBase {
     @InjectExtra(JOKE)
     protected Joke joke;
 
@@ -30,6 +31,13 @@ public class ActiveVideo extends ActivityBase {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_web_entry);
         wv_large_image.getSettings().setJavaScriptEnabled(true);
-        wv_large_image.loadUrl(joke.getVideourl());
+
+        if(joke.isVideo()) {
+            wv_large_image.loadUrl(joke.getVideourl());
+        }
+        else if(joke.isLong()){
+            String url = String.format(FORMAT_URL_JOKE, joke.get_id());
+            wv_large_image.loadUrl(url);
+        }
     }
 }

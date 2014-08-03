@@ -64,9 +64,9 @@ public class AdapterJokes extends AdapterAlternatingColorList<Joke> {
     protected void update(int position, Joke joke) {
         super.update(position, joke);
 
-        setText(0, joke.getName());
-        setText(1, PrettyDateFormat.defaultFormat(joke.getCreated_at()));
-        setText(2, Html.fromHtml(joke.getText()));
+        setText(0, joke.getTitle());
+        setText(1, joke.getName());
+        setText(2, joke.getText());
 
         setGone(3, true);
         setGone(4, true);

@@ -1,9 +1,12 @@
 package dd.android.joke.core;
 
+import android.text.TextUtils;
 import dd.android.common.PrettyDateFormat;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,9 +19,10 @@ public class Joke implements Serializable {
     private static final long serialVersionUID = 21021235433891457L;
 
     public String _id;
-    String joke_id, name, text, imgurl, videourl;
+    String joke_id, name, text, imgurl, videourl, title;
     int forward;
     Date created_at;
+    List<String> tags;
 
     public Date getCreated_at() {
         return created_at;
@@ -77,7 +81,23 @@ public class Joke implements Serializable {
         this.name = name;
     }
 
-//    public Picture getPicture() {
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    //    public Picture getPicture() {
 //        return picture;
 //    }
 //
@@ -111,5 +131,9 @@ public class Joke implements Serializable {
 
     public Boolean isGif(){
         return isImage() && "gif".endsWith(getImgurl().substring(getImgurl().length()-3));
+    }
+
+    public Boolean isLong(){
+        return tags != null && tags.contains("长篇");
     }
 }

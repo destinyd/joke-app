@@ -81,9 +81,9 @@ public class ActivityLauncher extends
 //                R.drawable.tab_settings,
                 ActivityJokeVideo.class);
 //                ActivityJokeShort.class);
-//        addTab("长篇",
-////                R.drawable.tab_home,
-//                ActivityJokeLong.class);
+        addTab("长篇",
+//                R.drawable.tab_home,
+                ActivityJokeLong.class);
     }
 
     private void addTab(String labelId,

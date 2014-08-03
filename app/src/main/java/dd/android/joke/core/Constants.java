@@ -81,6 +81,8 @@ public class Constants {
 
         public static final String FORMAT_URL_JOKES = URL_BASE + "/%s-p%d.json";
 
+        public static final String FORMAT_URL_JOKE = URL_BASE + "/jokes/%s";
+
 //        public static final String FORMAT_URL_PROBLEM = URL_BASE + "/android/%s.json";
 //
 //        public static final String FORMAT_URL_PROBLEM_WITH_UUID = URL_BASE + "/android/%s.json?uuid=%s";
