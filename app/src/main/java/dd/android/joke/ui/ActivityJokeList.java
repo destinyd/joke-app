@@ -39,6 +39,8 @@ public abstract class ActivityJokeList extends
         super.onCreate(savedInstanceState);    //To change body of overridden methods use File | Settings | File Templates.
         setContentView(R.layout.list);
 
+        init_refresh_texts();
+
         list.setOnItemClickListener(new PLA_AdapterView.OnItemClickListener() {
 
             @Override
@@ -65,10 +67,20 @@ public abstract class ActivityJokeList extends
         getJokes();
     }
 
+    private void init_refresh_texts() {
+        list.set_text_refreshing("正在刷新");
+        list.set_text_pull_to_refresh("下拉刷新");
+        list.set_text_release_to_refresh("放开刷新");
+    }
 
-    private void initProblems() {
+
+    private void initJokesIfNull() {
         if (jokes == null)
-            jokes = new ArrayList<Joke>();
+            initJokes();
+    }
+
+    private void initJokes() {
+        jokes = new ArrayList<Joke>();
     }
 
     private void refreshPage() {
@@ -85,13 +97,16 @@ public abstract class ActivityJokeList extends
         progressDialogShow(this);
         new RoboAsyncTask<Boolean>(this) {
             public Boolean call() throws Exception {
-                List<Joke> get_commodities = ServiceYS.getJokes(getType(), page);
-                if (page > 1 && get_commodities != null && get_commodities.size() == 0) {
+                List<Joke> get_jokes = ServiceYS.getJokes(getType(), page);
+                if (page > 1 && get_jokes != null && get_jokes.size() == 0) {
                     page--;
                     list.set_on_load_more_listener(null);
                     Toast.makeText(ActivityJokeList.this, "没有数据了。", Toast.LENGTH_LONG);
-                } else
-                    addJokes(get_commodities);
+                } else if (page == 1) {
+                    refreshJokes(get_jokes);
+                } else {
+                    addJokes(get_jokes);
+                }
                 return true;
             }
 
@@ -103,20 +118,26 @@ public abstract class ActivityJokeList extends
 
             @Override
             public void onSuccess(Boolean relationship) {
-                commodities_to_list();
+                jokes_to_list();
             }
 
             @Override
             protected void onFinally() throws RuntimeException {
                 progressDialogDismiss();
                 list.on_load_more_complete();
+                list.on_refresh_complete();
             }
         }.execute();
     }
 
+    private void refreshJokes(List<Joke> get_jokes) {
+        initJokes();
+        jokes.addAll(get_jokes);
+    }
+
 
     private void addJokes(List<Joke> get_jokes) {
-        initProblems();
+        initJokesIfNull();
         jokes.addAll(get_jokes);
     }
 
@@ -130,7 +151,7 @@ public abstract class ActivityJokeList extends
 
     }
 
-    private void commodities_to_list() {
+    private void jokes_to_list() {
         if (adapter == null) {
             adapter = new AdapterJokes(
                     getLayoutInflater(), jokes,
