@@ -53,9 +53,9 @@
     <color name="tabMedium">#2B2B2B</color>
     <color name="tabDark">#000000</color>
     <color name="tabTransparent">#10ffffff</color>
-    <color name="joke_titlebar_color">#F7F7F7</color>
-    <color name="joke_title_text_color">#9C9E9C</color>
+    <color name="joke_titlebar_bg_color">#F7F7F7</color>
     <color name="joke_bgcolor">#FFFFFF</color>
     <color name="main_background_color">#DEE3FF</color>
+    <color name="joke_text_color">#212121</color>
 
 </resources>

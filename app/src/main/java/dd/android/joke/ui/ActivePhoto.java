@@ -31,7 +31,7 @@ public class ActivePhoto extends ActivityBase {
     private MyImageLoader avatars;
 
     final static DisplayImageOptions options = new DisplayImageOptions.Builder()
-            .showImageOnLoading(R.drawable.gravatar_icon) // resource or drawable
+            .showImageOnLoading(R.drawable.loading) // resource or drawable
             .showImageForEmptyUri(R.drawable.gravatar_icon) // resource or drawable
             .showImageOnFail(R.drawable.gravatar_icon) // resource or drawable
             .resetViewBeforeLoading(false)  // default

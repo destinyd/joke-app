@@ -24,4 +24,5 @@
     <dimen name="tab_space_plus1">3dp</dimen>
     <dimen name="tab_space_bottom_line">36sp</dimen>
     <dimen name="tab_space_unselected_top">6sp</dimen>
+    <dimen name="rounded_radius">8dp</dimen>
 </resources>

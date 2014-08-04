@@ -12,8 +12,6 @@
             android:layout_height="match_parent"
             waterfall:plaColumnNumber="1"
             waterfall:plaLandscapeColumnNumber="2"
-            waterfall:plaColumnPaddingLeft="5dp"
-            waterfall:plaColumnPaddingRight="5dp"
             android:background="@color/main_background_color"
             />
 </LinearLayout>
