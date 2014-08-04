@@ -2,30 +2,15 @@
 package dd.android.joke.ui;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
-import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
-import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
-import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
-import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
-import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import dd.android.joke.R;
-import dd.android.joke.core.Constants;
-import dd.android.joke.core.PropertiesController;
 import roboguice.activity.RoboTabActivity;
-
-import java.io.File;
 
 public class ActivityLauncher extends
         RoboTabActivity {
@@ -37,6 +22,8 @@ public class ActivityLauncher extends
         super.onCreate(bundle);
         setContentView(R.layout.act_main);
         factory = this;
+
+        initBaidu();
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .memoryCacheExtraOptions(400, 2048) // default = device screen dimensions
@@ -66,6 +53,13 @@ public class ActivityLauncher extends
 
         tabHost = getTabHost();
         setTabs();
+    }
+
+    private void initBaidu() {
+//        boolean isInit = Frontia.init(getApplicationContext(), "NLhScpRSu1Bg9I9nrp07K341");
+//        if(isInit){//Frontia is successfully initialized.
+//            //Use Frontia
+//        }
     }
 
     private void setTabs() {

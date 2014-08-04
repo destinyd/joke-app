@@ -1,27 +1,21 @@
 package dd.android.joke.ui;
 
-import android.graphics.Bitmap;
-import android.os.Handler;
-import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import dd.android.common.PrettyDateFormat;
 import dd.android.joke.R;
-import dd.android.joke.core.MyImageLoader;
 import dd.android.joke.core.Joke;
-import pl.droidsonroids.gif.GifImageView;
+import dd.android.joke.core.MyImageLoader;
 
 import java.util.List;
 
 public class AdapterJokes extends AdapterAlternatingColorList<Joke> {
+    private static final String TAG = "AdapterJokes";
     private final MyImageLoader avatars;
+    private final LayoutInflater layoutInflater;
     final static DisplayImageOptions options = new DisplayImageOptions.Builder()
             .showImageOnLoading(R.drawable.loading) // resource or drawable
             .cacheInMemory()
@@ -31,6 +25,7 @@ public class AdapterJokes extends AdapterAlternatingColorList<Joke> {
     public AdapterJokes(LayoutInflater inflater, List<Joke> items, MyImageLoader avatars) {
         super(R.layout.item_joke,inflater,items);
         this.avatars = avatars;
+        layoutInflater = inflater;
     }
 
     /**
@@ -50,11 +45,11 @@ public class AdapterJokes extends AdapterAlternatingColorList<Joke> {
 
     @Override
     protected int[] getChildViewIds() {
-        return new int[] { R.id.tv_name, R.id.tv_published_at, R.id.tv_text, R.id.iv_image, R.id.iv_gif, R.id.iv_play };
+        return new int[] { R.id.tv_name, R.id.tv_published_at, R.id.tv_text, R.id.iv_image, R.id.iv_gif, R.id.iv_play, R.id.ll_share };
     }
 
     @Override
-    protected void update(int position, Joke joke) {
+    protected void update(int position, final Joke joke) {
         super.update(position, joke);
 
         setText(0, joke.getName());
@@ -80,6 +75,41 @@ public class AdapterJokes extends AdapterAlternatingColorList<Joke> {
             if(joke.isGif())
                 setGone(4, false);
         }
+        view(6).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                FrontiaSocialShareContent fssc = new FrontiaSocialShareContent();
+//                fssc.setWXMediaObjectType(FrontiaSocialShareContent.FrontiaIMediaObject.TYPE_URL);
+//                fssc.setQQRequestType(FrontiaSocialShareContent.FrontiaIQQReqestType.TYPE_DEFAULT);
+//                fssc.setTitle(joke.getTitle());
+//                fssc.setLinkUrl(String.format(FORMAT_URL_JOKE, joke.get_id()));
+//                fssc.setImageUri(Uri.parse(joke.getImgurl()));
+//                FrontiaSocialShare socialshare = Frontia.getSocialShare();
+//                socialshare.setClientName(FrontiaAuthorization.MediaType.QQFRIEND.toString(), "笑料百出");
+//                Activity activity = (Activity)view.getContext();
+//                Intent intent = activity.getIntent();
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                Log.d(TAG, "OnClickListener view:" + view.getClass().getName());
+//                Log.d(TAG, "view.getContext().class:" + view.getContext().getClass().getName());
+//                Log.d(TAG, "intent:" + intent.getClass().getName());
+//                socialshare.show(activity.getWindow().getDecorView(), fssc, FrontiaSocialShare.FrontiaTheme.LIGHT, new FrontiaSocialShareListener() {
+//                    @Override
+//                    public void onSuccess() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(int i, String s) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancel() {
+//
+//                    }
+//                });
+            }
+        });
     }
 
 

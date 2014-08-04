@@ -2,6 +2,7 @@ package dd.android.joke.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import com.google.inject.Inject;
@@ -24,6 +25,7 @@ import static dd.android.joke.core.Constants.Extra.JOKE;
  */
 public abstract class ActivityJokeList extends
         ActivityBase {
+    private static final String TAG = "ActivityJokeList";
     List<Joke> jokes = new ArrayList<Joke>();
 
     @InjectView(R.id.list)
@@ -142,6 +144,10 @@ public abstract class ActivityJokeList extends
     }
 
     public void onListItemClick(PLA_AdapterView l, View v, int position, long id) {
+        Log.d(TAG, "l:" + l.getClass().getName());
+        Log.d(TAG, "v:" + v.getClass().getName());
+        Log.d(TAG, "position:" + position);
+        Log.d(TAG, "id:" + id);
         Joke joke = ((Joke) l.getItemAtPosition(position));
         if (joke.isVideo() || joke.isLong())
             startActivity(new Intent(this, ActiveWeb.class).putExtra(JOKE, joke));

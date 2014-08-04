@@ -1,8 +1,10 @@
 package dd.android.joke.ui;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.webkit.WebView;
+import android.widget.Button;
 import dd.android.joke.R;
 import dd.android.joke.core.Joke;
 import roboguice.inject.InjectExtra;
@@ -25,6 +27,8 @@ public class ActiveWeb extends ActivityBase {
     @InjectView(R.id.wv_show)
     protected WebView wv_large_image;
 
+    @InjectView(R.id.btn_share)
+    protected Button btn_share;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,5 +43,10 @@ public class ActiveWeb extends ActivityBase {
             String url = String.format(FORMAT_URL_JOKE, joke.get_id());
             wv_large_image.loadUrl(url);
         }
+        btn_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
     }
 }
