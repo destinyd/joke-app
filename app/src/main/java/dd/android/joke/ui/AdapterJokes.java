@@ -24,15 +24,8 @@ public class AdapterJokes extends AdapterAlternatingColorList<Joke> {
     private final MyImageLoader avatars;
     final static DisplayImageOptions options = new DisplayImageOptions.Builder()
             .showImageOnLoading(R.drawable.loading) // resource or drawable
-            .showImageForEmptyUri(R.drawable.gravatar_icon) // resource or drawable
-            .showImageOnFail(R.drawable.gravatar_icon) // resource or drawable
-            .resetViewBeforeLoading(false)  // default
-            .delayBeforeLoading(200)
+            .cacheInMemory()
             .cacheOnDisk(true)
-            .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
-            .bitmapConfig(Bitmap.Config.ARGB_8888) // default
-            .displayer(new SimpleBitmapDisplayer()) // default
-            .handler(new Handler()) // default
             .build();
 
     public AdapterJokes(LayoutInflater inflater, List<Joke> items, MyImageLoader avatars) {

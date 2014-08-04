@@ -43,7 +43,7 @@ public class ActivityLauncher extends
                 .diskCacheExtraOptions(400, 2048, null)
 //                .taskExecutor(...)
 //        .taskExecutorForCachedImages(...)
-                .threadPoolSize(3) // default
+                .threadPoolSize(5) // default
                 .threadPriority(Thread.NORM_PRIORITY - 2)
 //                .tasksProcessingOrder(QueueProcessingType.FIFO) // default
 //                .denyCacheImageMultipleSizesInMemory()
