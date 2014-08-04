@@ -75,40 +75,50 @@
                         android:textColor="@color/joke_text_color"
                         />
             </LinearLayout>
+            <RelativeLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_below="@+id/ll_text"
+                    >
 
-            <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/iv_image"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_below="@+id/ll_text"
-                    />
-            <!--<pl.droidsonroids.gif.GifImageView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/iv_image"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:layout_below="@+id/ll_text"-->
-            <!--/>-->
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/iv_image"
+                        android:layout_gravity="center_horizontal"
+                        />
+                <!--<pl.droidsonroids.gif.GifImageView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/iv_image"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:layout_below="@+id/ll_text"-->
+                <!--/>-->
 
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/iv_gif"
-                    android:layout_alignRight="@+id/iv_image"
-                    android:layout_alignBottom="@+id/iv_image"
-                    android:src="@drawable/gif"
-                    android:visibility="gone"/>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/iv_gif"
+                        android:layout_alignRight="@+id/iv_image"
+                        android:layout_alignBottom="@+id/iv_image"
+                        android:src="@drawable/playgif"
+                        android:visibility="gone"
+                        android:scaleType="centerInside"
+                        android:layout_centerInParent="true"
+                        />
 
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/iv_play"
-                    android:src="@drawable/play"
-                    android:visibility="gone"
-                    android:layout_centerInParent="true"
-                    />
-            <!--android:layout_alignBaseline="@+id/iv_image"-->
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/iv_play"
+                        android:src="@drawable/play"
+                        android:visibility="gone"
+                        android:scaleType="centerInside"
+                        android:layout_centerInParent="true"
+                        android:layout_alignRight="@+id/iv_image"
+                        android:layout_alignBottom="@+id/iv_image"
+                        />
+                <!--android:layout_alignBaseline="@+id/iv_image"-->
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>
