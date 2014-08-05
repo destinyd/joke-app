@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
+import cn.bidaround.youtui_template.YtTemplate;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import dd.android.joke.R;
@@ -22,6 +23,8 @@ public class ActivityLauncher extends
         super.onCreate(bundle);
         setContentView(R.layout.act_main);
         factory = this;
+
+        YtTemplate.init(this);/*初始化友推*/
 
         initBaidu();
 

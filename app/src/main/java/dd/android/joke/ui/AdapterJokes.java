@@ -3,6 +3,9 @@ package dd.android.joke.ui;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import cn.bidaround.youtui_template.YouTuiViewType;
+import cn.bidaround.youtui_template.YtTemplate;
+import cn.bidaround.ytcore.data.ShareData;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import dd.android.common.PrettyDateFormat;
@@ -11,6 +14,8 @@ import dd.android.joke.core.Joke;
 import dd.android.joke.core.MyImageLoader;
 
 import java.util.List;
+
+import static dd.android.joke.core.Constants.Http.*;
 
 public class AdapterJokes extends AdapterAlternatingColorList<Joke> {
     private static final String TAG = "AdapterJokes";
@@ -78,6 +83,19 @@ public class AdapterJokes extends AdapterAlternatingColorList<Joke> {
         view(6).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ShareData shareData = new ShareData();
+                shareData.isAppShare = false;//设置为true则分享的信息从友推后台填写的应用信息中读取，可动态更新，后面的值不用设置。
+                shareData.setDescription(joke.getText());
+                shareData.setTitle(joke.getTitle());
+                shareData.setText(joke.getText());
+                shareData.setTarget_url(String.format(FORMAT_URL_JOKE, joke.get_id()));
+                shareData.setImageUrl(joke.getImgurl());
+                YtTemplate blackTemp = new YtTemplate(ActivityLauncher.getFactory(), YouTuiViewType.WHITE_GRID,false);  //白色网格样式不需要积分活动
+                blackTemp.setShareData(shareData);//设置默认的分享数据;shareData 设置参看4.6
+                blackTemp.show();
+
+
+
 //                FrontiaSocialShareContent fssc = new FrontiaSocialShareContent();
 //                fssc.setWXMediaObjectType(FrontiaSocialShareContent.FrontiaIMediaObject.TYPE_URL);
 //                fssc.setQQRequestType(FrontiaSocialShareContent.FrontiaIQQReqestType.TYPE_DEFAULT);

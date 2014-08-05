@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--youtui-->
+    <style name="YtDialogTheme" parent="android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    <style name="YtSharePopupAnim">
+        <item name="android:windowEnterAnimation">@anim/sharepopup_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/sharepopup_fade_out</item>
+    </style>
+    <!--youtui end-->
+</resources>
