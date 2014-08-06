@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
 import cn.bidaround.youtui_template.YtTemplate;
+import com.five.adwoad.AdwoAdView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import dd.android.joke.R;
@@ -26,7 +27,8 @@ public class ActivityLauncher extends
 
         YtTemplate.init(this);/*初始化友推*/
 
-        initBaidu();
+        //广告满横屏
+        AdwoAdView.setBannerMatchScreenWidth(true);
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .memoryCacheExtraOptions(400, 2048) // default = device screen dimensions
@@ -56,13 +58,6 @@ public class ActivityLauncher extends
 
         tabHost = getTabHost();
         setTabs();
-    }
-
-    private void initBaidu() {
-//        boolean isInit = Frontia.init(getApplicationContext(), "NLhScpRSu1Bg9I9nrp07K341");
-//        if(isInit){//Frontia is successfully initialized.
-//            //Use Frontia
-//        }
     }
 
     private void setTabs() {
