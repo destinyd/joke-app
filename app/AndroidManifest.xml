@@ -2,12 +2,12 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="dd.android.joke"
-          android:versionCode="101"
-          android:versionName="1.01">
+          android:versionCode="102"
+          android:versionName="1.02">
 
     <uses-sdk
             android:minSdkVersion="8"
-            android:targetSdkVersion="17"/>
+            android:targetSdkVersion="20"/>
 
 
     <uses-permission android:name="android.permission.INTERNET"/>

@@ -49,6 +49,7 @@ public abstract class ActivityJokeList extends
         AdwoAdView adView = new AdwoAdView(this, "b9c50cd6ebd344ca87b0f1ee85d56c9b", true, 0);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         rl_jokes.addView(adView, layoutParams);
 
         init_refresh_texts();
