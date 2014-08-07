@@ -7,6 +7,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import dd.android.joke.R;
 import dd.android.joke.core.Joke;
+import dd.android.joke.core.ShareController;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
@@ -46,6 +47,7 @@ public class ActiveWeb extends ActivityBase {
         btn_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ShareController.showShare(ActiveWeb.this, joke);
             }
         });
     }
