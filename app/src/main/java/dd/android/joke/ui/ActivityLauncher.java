@@ -33,24 +33,9 @@ public class ActivityLauncher extends
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .memoryCacheExtraOptions(400, 2048) // default = device screen dimensions
                 .diskCacheExtraOptions(400, 2048, null)
-//                .taskExecutor(...)
-//        .taskExecutorForCachedImages(...)
                 .threadPoolSize(5) // default
                 .threadPriority(Thread.NORM_PRIORITY - 2)
-//                .tasksProcessingOrder(QueueProcessingType.FIFO) // default
-//                .denyCacheImageMultipleSizesInMemory()
-//                .memoryCache(new LruMemoryCache(2 * 1024 * 1024))
-//                .memoryCacheSize(2 * 1024 * 1024)
-//                .memoryCacheSizePercentage(13) // default
-////                .diskCache(new UnlimitedDiscCache(new File(Constants.Setting.SDCARD_PATH + "/cache"))) // default
                 .diskCacheSize(50 * 1024 * 1024)
-//                .diskCacheFileCount(100)
-//                .diskCacheFileNameGenerator(new HashCodeFileNameGenerator()) // default
-//                .imageDownloader(new BaseImageDownloader(getApplicationContext())) // default
-////                .imageDecoder(new BaseImageDecoder()) // default
-//                .defaultDisplayImageOptions(DisplayImageOptions.createSimple()) // default
-//                .writeDebugLogs()
-
                 .build();
 
         ImageLoader.getInstance().init(config);
