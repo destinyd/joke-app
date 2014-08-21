@@ -84,7 +84,7 @@ public class AdapterJokes extends AdapterAlternatingColorList<Joke> {
         view(6).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ShareController.showShare(ActivityLauncher.getFactory(), joke);
+                ShareController.showShare(ActivityDashboard.getFactory(), joke);
 //                FrontiaSocialShareContent fssc = new FrontiaSocialShareContent();
 //                fssc.setWXMediaObjectType(FrontiaSocialShareContent.FrontiaIMediaObject.TYPE_URL);
 //                fssc.setQQRequestType(FrontiaSocialShareContent.FrontiaIQQReqestType.TYPE_DEFAULT);

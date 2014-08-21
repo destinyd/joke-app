@@ -115,6 +115,7 @@
 
         <activity android:name=".ui.ActiveWeb"/>
         <activity android:name=".ui.ActivePhoto"/>
+        <activity android:name=".ui.ActivityDashboard"/>
 
         <!--youtui-->
         <!-- 微信分享需要注册该activity -->
