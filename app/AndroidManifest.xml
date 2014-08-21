@@ -80,9 +80,8 @@
         <!--android:name="com.baidu.frontia.FrontiaApplication"-->
         <activity
                 android:name=".ui.ActivityLauncher"
-                android:configChanges="keyboardHidden|orientation|screenSize"
                 android:label="@string/app_name"
-                android:windowSoftInputMode="adjustPan"
+                android:screenOrientation="portrait"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -115,7 +114,11 @@
 
         <activity android:name=".ui.ActiveWeb"/>
         <activity android:name=".ui.ActivePhoto"/>
-        <activity android:name=".ui.ActivityDashboard"/>
+        <activity android:name=".ui.ActivityDashboard"
+                  android:configChanges="keyboardHidden|orientation|screenSize"
+                  android:windowSoftInputMode="adjustPan"
+                  android:screenOrientation="portrait"
+                />
 
         <!--youtui-->
         <!-- 微信分享需要注册该activity -->
