@@ -26,16 +26,6 @@ public class ActivityLauncher extends
         //广告满横屏
         AdwoAdView.setBannerMatchScreenWidth(true);
 
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-                .memoryCacheExtraOptions(400, 2048) // default = device screen dimensions
-                .diskCacheExtraOptions(400, 2048, null)
-                .threadPoolSize(5) // default
-                .threadPriority(Thread.NORM_PRIORITY - 2)
-                .diskCacheSize(50 * 1024 * 1024)
-                .build();
-
-        ImageLoader.getInstance().init(config);
-
         startActivity(new Intent(this, ActivityDashboard.class));
         finish();
     }

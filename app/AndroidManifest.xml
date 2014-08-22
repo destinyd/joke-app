@@ -76,7 +76,7 @@
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name"
             android:theme="@style/Theme.Bootstrap.Dark"
-            >
+            android:name=".JokeApplication">
         <!--android:name="com.baidu.frontia.FrontiaApplication"-->
         <activity
                 android:name=".ui.ActivityLauncher"
