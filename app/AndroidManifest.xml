@@ -184,6 +184,7 @@
                 android:name="cn.bidaround.youtui_template.ScreenCapEditActivity"
                 android:screenOrientation="portrait"
                 android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        <activity android:name=".ui.FragmentList"/>
 
         <!-- 友推渠道号，应用名(英文或拼音)+"_yt"，如：“jd_yt”，用于识别通过友推下载的应用，请正确填写否则无法正确统计 -->
         <meta-data

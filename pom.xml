@@ -19,7 +19,7 @@
         <android-support.version>r7</android-support.version>
         <android.plugin.version>3.8.1</android.plugin.version>
         <platform.version>L_r1</platform.version>
-        <compatibility-v4.version>19.1.0</compatibility-v4.version>
+        <compatibility-v4.version>20.0.0</compatibility-v4.version>
         <abs.version>4.4.0</abs.version>
     </properties>
 
