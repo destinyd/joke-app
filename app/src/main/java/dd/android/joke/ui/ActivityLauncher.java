@@ -9,6 +9,7 @@ import com.five.adwoad.AdwoAdView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import dd.android.joke.R;
+import dd.android.joke.activity.ActivityDashboard;
 
 public class ActivityLauncher extends
         Activity {

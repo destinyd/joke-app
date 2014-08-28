@@ -1,22 +1,21 @@
-package dd.android.joke.ui;
+package dd.android.joke.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
-import com.five.adwoad.AdwoAdView;
-import com.google.inject.Inject;
 import com.mindpin.android.pinterestlistview.PinterestListView;
 import com.mindpin.android.pinterestlistview.internal.PLA_AdapterView;
 import dd.android.joke.R;
 import dd.android.joke.core.Joke;
-import dd.android.joke.core.MyImageLoader;
 import dd.android.joke.core.ServiceYS;
-import roboguice.inject.InjectView;
+import dd.android.joke.ui.ActivePhoto;
+import dd.android.joke.ui.ActiveWeb;
+import dd.android.joke.ui.AdapterJokes;
+import dd.android.joke.fragment.base.FragmentBase;
 import roboguice.util.RoboAsyncTask;
 
 import java.util.ArrayList;
@@ -25,33 +24,35 @@ import java.util.List;
 import static dd.android.joke.core.Constants.Extra.JOKE;
 
 /**
- * Created by dd on 14-8-3.
+ * Created by dd on 14-8-27.
  */
-public abstract class ActivityJokeList extends
-        ActivityBase {
-    private static final String TAG = "ActivityJokeList";
+public class FragmentList extends FragmentBase {
+    private static final String TAG = "FragmentList";
+    private View current_view;
+    LayoutInflater inflater;
+    private String type;
+
     List<Joke> jokes = new ArrayList<Joke>();
 
-    @InjectView(R.id.list)
     private PinterestListView list;
-    @InjectView(R.id.rl_jokes)
-    private RelativeLayout rl_jokes;
-    @Inject
-    private MyImageLoader avatars;
     AdapterJokes adapter = null;
-    int page = 1, pass_page = 0;
+    int page = 1;
+
+    public FragmentList(String type) {
+        this.type = type;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        init(inflater);
 
-        super.onCreate(savedInstanceState);    //To change body of overridden methods use File | Settings | File Templates.
-        setContentView(R.layout.list);
-        AdwoAdView adView = new AdwoAdView(this, "b9c50cd6ebd344ca87b0f1ee85d56c9b", true, 0);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-        layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-        rl_jokes.addView(adView, layoutParams);
+        return current_view;
+    }
 
+    private void init(LayoutInflater inflater) {
+        this.inflater = inflater;
+        current_view = inflater.inflate(R.layout.list, null);
+        list = (PinterestListView) current_view.findViewById(R.id.list);
         init_refresh_texts();
 
         list.setOnItemClickListener(new PLA_AdapterView.OnItemClickListener() {
@@ -77,7 +78,16 @@ public abstract class ActivityJokeList extends
                     }
                 }
         );
-        getJokes();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        Log.e(TAG, "onViewCreated");
+        super.onViewCreated(view, savedInstanceState);
+        if(adapter == null)
+            refreshPage();
+        else
+            list.set_adapter(adapter);
     }
 
     private void init_refresh_texts() {
@@ -107,18 +117,21 @@ public abstract class ActivityJokeList extends
     }
 
     private void getJokes() {
-        progressDialogShow(this);
-        new RoboAsyncTask<Boolean>(this) {
+        progressDialogShow(activity);
+        new RoboAsyncTask<Boolean>(activity) {
             public Boolean call() throws Exception {
                 List<Joke> get_jokes = ServiceYS.getJokes(getType(), page);
                 if (page > 1 && get_jokes != null && get_jokes.size() == 0) {
                     page--;
                     list.set_on_load_more_listener(null);
-                    Toast.makeText(ActivityJokeList.this, "没有数据了。", Toast.LENGTH_LONG);
+                    Toast.makeText(activity, "没有数据了。", Toast.LENGTH_LONG);
+                    Log.e(TAG, "no more");
                 } else if (page == 1) {
                     refreshJokes(get_jokes);
+                    Log.e(TAG, "refreshJokes");
                 } else {
                     addJokes(get_jokes);
+                    Log.e(TAG, "addJokes");
                 }
                 return true;
             }
@@ -126,11 +139,13 @@ public abstract class ActivityJokeList extends
             @Override
             protected void onException(Exception e) throws RuntimeException {
                 e.printStackTrace();
-                Toast.makeText(ActivityJokeList.this, "获取信息失败", Toast.LENGTH_LONG);
+                Toast.makeText(activity, "获取信息失败", Toast.LENGTH_LONG);
+                Log.e(TAG, "onException");
             }
 
             @Override
             public void onSuccess(Boolean relationship) {
+                Log.e(TAG, "onSuccess");
                 jokes_to_list();
             }
 
@@ -161,16 +176,17 @@ public abstract class ActivityJokeList extends
         Log.d(TAG, "id:" + id);
         Joke joke = ((Joke) l.getItemAtPosition(position));
         if (joke.isVideo() || joke.isLong())
-            startActivity(new Intent(this, ActiveWeb.class).putExtra(JOKE, joke));
+            startActivity(new Intent(activity, ActiveWeb.class).putExtra(JOKE, joke));
         else if (joke.isImage()) {
-            startActivity(new Intent(this, ActivePhoto.class).putExtra(JOKE, joke));
+            startActivity(new Intent(activity, ActivePhoto.class).putExtra(JOKE, joke));
         }
 
     }
 
     private void jokes_to_list() {
+        Log.e(TAG, "jokes_to_list");
         if (adapter == null) {
-            adapter = new AdapterJokes(getLayoutInflater(), jokes);
+            adapter = new AdapterJokes(inflater, jokes);
             list.setAdapter(adapter);
         } else {
             adapter.setItems(jokes);
@@ -178,5 +194,7 @@ public abstract class ActivityJokeList extends
         }
     }
 
-    protected abstract String getType();
+    protected String getType(){
+        return type;
+    };
 }

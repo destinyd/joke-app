@@ -10,6 +10,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import dd.android.common.PrettyDateFormat;
 import dd.android.joke.R;
+import dd.android.joke.activity.ActivityDashboard;
 import dd.android.joke.core.Joke;
 import dd.android.joke.core.MyImageLoader;
 import dd.android.joke.core.ShareController;
@@ -20,28 +21,28 @@ import static dd.android.joke.core.Constants.Http.*;
 
 public class AdapterJokes extends AdapterAlternatingColorList<Joke> {
     private static final String TAG = "AdapterJokes";
-    private final MyImageLoader avatars;
-    private final LayoutInflater layoutInflater;
+//    private final MyImageLoader avatars;
+//    private final LayoutInflater layoutInflater;
     final static DisplayImageOptions options = new DisplayImageOptions.Builder()
             .showImageOnLoading(R.drawable.loading) // resource or drawable
             .cacheInMemory()
             .cacheOnDisk(true)
             .build();
 
-    public AdapterJokes(LayoutInflater inflater, List<Joke> items, MyImageLoader avatars) {
-        super(R.layout.item_joke,inflater,items);
-        this.avatars = avatars;
-        layoutInflater = inflater;
-    }
-
-    /**
-     * @param inflater
-     * @param items
-     */
     public AdapterJokes(LayoutInflater inflater, List<Joke> items) {
-        this(inflater, items, null);
-
+        super(R.layout.item_joke,inflater,items);
+//        this.avatars = avatars;
+//        layoutInflater = inflater;
     }
+
+//    /**
+//     * @param inflater
+//     * @param items
+//     */
+//    public AdapterJokes(LayoutInflater inflater, List<Joke> items) {
+//        this(inflater, items, null);
+//
+//    }
     @Override
     public long getItemId(final int position) {
         final String id = getItem(position)._id;

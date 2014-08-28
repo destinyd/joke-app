@@ -114,7 +114,7 @@
 
         <activity android:name=".ui.ActiveWeb"/>
         <activity android:name=".ui.ActivePhoto"/>
-        <activity android:name=".ui.ActivityDashboard"
+        <activity android:name=".activity.ActivityDashboard"
                   android:configChanges="keyboardHidden|orientation|screenSize"
                   android:windowSoftInputMode="adjustPan"
                   android:screenOrientation="portrait"
@@ -184,7 +184,7 @@
                 android:name="cn.bidaround.youtui_template.ScreenCapEditActivity"
                 android:screenOrientation="portrait"
                 android:theme="@android:style/Theme.Black.NoTitleBar"/>
-        <activity android:name=".ui.FragmentList"/>
+        <activity android:name=".activity.base.BaseFragmentActivity"/>
 
         <!-- 友推渠道号，应用名(英文或拼音)+"_yt"，如：“jd_yt”，用于识别通过友推下载的应用，请正确填写否则无法正确统计 -->
         <meta-data
