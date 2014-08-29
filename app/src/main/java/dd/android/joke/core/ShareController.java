@@ -27,4 +27,12 @@ public class ShareController {
         blackTemp.setShareData(shareData);//设置默认的分享数据;shareData 设置参看4.6
         blackTemp.show();
     }
+
+    public static void showAppShare(Activity activity){
+        ShareData shareData = new ShareData();
+        shareData.isAppShare = true;//设置为true则分享的信息从友推后台填写的应用信息中读取，可动态更新，后面的值不用设置。
+        YtTemplate blackTemp = new YtTemplate(activity, YouTuiViewType.WHITE_GRID, false);  //白色网格样式不需要积分活动
+        blackTemp.setShareData(shareData);//设置默认的分享数据;shareData 设置参看4.6
+        blackTemp.show();
+    }
 }

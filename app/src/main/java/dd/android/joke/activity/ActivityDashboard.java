@@ -1,6 +1,8 @@
 
 package dd.android.joke.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -15,6 +17,7 @@ import cn.bidaround.youtui_template.YtTemplate;
 import com.actionbarsherlock.view.MenuItem;
 import dd.android.joke.R;
 import dd.android.joke.activity.base.BaseFragmentActivity;
+import dd.android.joke.core.ShareController;
 import dd.android.joke.fragment.FragmentList;
 import dd.android.joke.ui.MenuListAdapter;
 import dd.android.joke.widget.SelectableLinearLayout;
@@ -58,6 +61,7 @@ public class ActivityDashboard extends BaseFragmentActivity implements View.OnCl
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     SelectableLinearLayout sll_short, sll_image, sll_video, sll_long;
+    AlertDialog quit_alert_dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -103,7 +107,7 @@ public class ActivityDashboard extends BaseFragmentActivity implements View.OnCl
 
     private void init_drawer() {
         // Generate title
-        drawer_titles = new String[]{"分享给好友", "用户反馈"
+        drawer_titles = new String[]{"分享给好友", "用户反馈", "退出"
         };
         //,"精彩推荐"};
 
@@ -222,35 +226,43 @@ public class ActivityDashboard extends BaseFragmentActivity implements View.OnCl
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-            selectItem(position);
+            select_drawer_item(position);
         }
     }
 
-    private void selectItem(int position) {
-
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        // Locate Position
+    private void select_drawer_item(int position) {
         switch (position) {
             case 0:
-                ft.replace(R.id.content_frame, fragment_short);
+                ShareController.showAppShare(this);
                 break;
             case 1:
-                ft.replace(R.id.content_frame, fragment_image);
                 break;
             case 2:
-                ft.replace(R.id.content_frame, fragment_video);
-                break;
-            case 3:
-                ft.replace(R.id.content_frame, fragment_long);
-                break;
+                quit_alert_dialog = create_quit_alert_dialog();
+                quit_alert_dialog.show();
         }
-        ft.commit();
-        mDrawerList.setItemChecked(position, true);
-
-        // Get the title followed by the position
-        setTitle(drawer_titles[position]);
-        // Close drawer
         mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    private AlertDialog create_quit_alert_dialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.are_you_sure)
+                .setCancelable(true)
+                .setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ActivityDashboard.this.finish();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        quit_alert_dialog.hide();
+                        quit_alert_dialog.dismiss();
+                    }
+                })
+        ;
+        return builder.create();
     }
 
     @Override

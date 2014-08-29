@@ -48,7 +48,6 @@
     <string name="menu_activity_quit">退出活动</string>
     <string name="menu_activity_invite">邀请好友</string>
     <string name="menu_activity_close">关闭活动</string>
-    <string name="dialog_sure">你确定？</string>
     <string name="page_new_activity">组织活动</string>
     <string name="label_notification_type">提醒类型</string>
     <string name="label_notification_created_at">时间</string>
@@ -94,4 +93,7 @@
     <string name="share_app">分享给朋友</string>
     <string name="drawer_open">设置</string>
     <string name="drawer_close">关闭设置</string>
+    <string name="are_you_sure">你确定吗？</string>
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
 </resources>
