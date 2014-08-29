@@ -1,4 +1,4 @@
-package dd.android.joke.ui;
+package dd.android.joke.adapter;
 
 
 import android.content.Context;
@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import dd.android.joke.R;
 
-public class MenuListAdapter extends BaseAdapter {
+public class AdapterMenuList extends BaseAdapter {
 
     // Declare Variables
     Context context;
@@ -18,7 +18,7 @@ public class MenuListAdapter extends BaseAdapter {
     int[] mIcon;
     LayoutInflater inflater;
 
-    public MenuListAdapter(Context context, String[] title, int[] icon) {
+    public AdapterMenuList(Context context, String[] title, int[] icon) {
         this.context = context;
         this.mTitle = title;
         this.mIcon = icon;

@@ -1,5 +1,5 @@
 
-package dd.android.joke.ui;
+package dd.android.joke.adapter;
 
 import android.view.LayoutInflater;
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;

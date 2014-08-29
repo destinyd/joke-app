@@ -6,6 +6,7 @@ import android.view.Window;
 import android.webkit.WebView;
 import android.widget.Button;
 import dd.android.joke.R;
+import dd.android.joke.activity.base.ActivityBase;
 import dd.android.joke.core.Joke;
 import dd.android.joke.core.ShareController;
 import roboguice.inject.InjectExtra;

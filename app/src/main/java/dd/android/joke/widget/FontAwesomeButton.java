@@ -1,9 +1,10 @@
-package dd.android.joke.utils;
+package dd.android.joke.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.Button;
+import dd.android.joke.utils.UiFont;
 
 public class FontAwesomeButton extends Button {
 

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import dd.android.joke.R;
 import android.os.Bundle;
 import android.view.View;
+import dd.android.joke.activity.base.ActivityBase;
 import dd.android.joke.core.PropertiesController;
 import dd.android.joke.core.Settings;
 import roboguice.inject.InjectView;

@@ -2,25 +2,17 @@ package dd.android.joke.ui;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 import com.github.kevinsawicki.wishlist.Toaster;
 import com.google.inject.Inject;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
-import dd.android.joke.R;
+import dd.android.joke.activity.base.ActivityBase;
 import dd.android.joke.core.Joke;
 import dd.android.joke.core.MyImageLoader;
 import pl.droidsonroids.gif.GifImageView;
 import roboguice.inject.InjectExtra;
-import roboguice.inject.InjectView;
 import uk.co.senab.photoview.PhotoView;
 
 import static dd.android.joke.core.Constants.Extra.JOKE;

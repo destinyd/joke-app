@@ -4,15 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-import com.five.adwoad.AdwoAdView;
 import com.google.inject.Inject;
 import com.mindpin.android.pinterestlistview.PinterestListView;
 import com.mindpin.android.pinterestlistview.internal.PLA_AdapterView;
 import dd.android.joke.R;
+import dd.android.joke.activity.base.ActivityBase;
+import dd.android.joke.adapter.AdapterJokes;
 import dd.android.joke.core.Joke;
 import dd.android.joke.core.MyImageLoader;
 import dd.android.joke.core.ServiceYS;
@@ -46,11 +45,11 @@ public abstract class ActivityJokeList extends
 
         super.onCreate(savedInstanceState);    //To change body of overridden methods use File | Settings | File Templates.
         setContentView(R.layout.list);
-        AdwoAdView adView = new AdwoAdView(this, "b9c50cd6ebd344ca87b0f1ee85d56c9b", true, 0);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-        layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-        rl_jokes.addView(adView, layoutParams);
+//        AdwoAdView adView = new AdwoAdView(this, "b9c50cd6ebd344ca87b0f1ee85d56c9b", true, 0);
+//        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+//        layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+//        rl_jokes.addView(adView, layoutParams);
 
         init_refresh_texts();
 

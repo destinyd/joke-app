@@ -17,9 +17,9 @@ import cn.bidaround.youtui_template.YtTemplate;
 import com.actionbarsherlock.view.MenuItem;
 import dd.android.joke.R;
 import dd.android.joke.activity.base.BaseFragmentActivity;
+import dd.android.joke.adapter.AdapterMenuList;
 import dd.android.joke.core.ShareController;
 import dd.android.joke.fragment.FragmentList;
-import dd.android.joke.ui.MenuListAdapter;
 import dd.android.joke.widget.SelectableLinearLayout;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class ActivityDashboard extends BaseFragmentActivity implements View.OnCl
     DrawerLayout mDrawerLayout;
     ListView mDrawerList;
     ActionBarDrawerToggle mDrawerToggle;
-    MenuListAdapter mMenuAdapter;
+    AdapterMenuList mMenuAdapter;
     String[] drawer_titles;
     String[] titles;
     int[] icon;
@@ -80,7 +80,17 @@ public class ActivityDashboard extends BaseFragmentActivity implements View.OnCl
         if (savedInstanceState == null) {
             selectTab(1);
         }
+
+//        init_adwo();
     }
+
+//    private void init_adwo() {
+//        AdwoAdView adView = new AdwoAdView(this, "b9c50cd6ebd344ca87b0f1ee85d56c9b", true, 0);
+//        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+//        layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+//        rl_jokes.addView(adView, layoutParams);
+//    }
 
     private void init_tabs() {
         // Generate title
@@ -127,10 +137,10 @@ public class ActivityDashboard extends BaseFragmentActivity implements View.OnCl
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
 
-        // Pass string arrays to MenuListAdapter
-        mMenuAdapter = new MenuListAdapter(ActivityDashboard.this, drawer_titles, icon);
+        // Pass string arrays to AdapterMenuList
+        mMenuAdapter = new AdapterMenuList(ActivityDashboard.this, drawer_titles, icon);
 
-        // Set the MenuListAdapter to the ListView
+        // Set the AdapterMenuList to the ListView
         mDrawerList.setAdapter(mMenuAdapter);
 
         // Capture listview menu item click
@@ -251,7 +261,7 @@ public class ActivityDashboard extends BaseFragmentActivity implements View.OnCl
                 .setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        ActivityDashboard.this.finish();
+                        exit();
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

@@ -14,7 +14,7 @@ import dd.android.joke.core.Joke;
 import dd.android.joke.core.ServiceYS;
 import dd.android.joke.ui.ActivePhoto;
 import dd.android.joke.ui.ActiveWeb;
-import dd.android.joke.ui.AdapterJokes;
+import dd.android.joke.adapter.AdapterJokes;
 import dd.android.joke.fragment.base.FragmentBase;
 import roboguice.util.RoboAsyncTask;
 

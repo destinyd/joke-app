@@ -1,4 +1,4 @@
-package dd.android.joke.ui;
+package dd.android.joke.activity.base;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -7,6 +7,7 @@ import android.content.Intent;
 import com.actionbarsherlock.view.MenuItem;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockActivity;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockFragmentActivity;
+import dd.android.joke.ui.ActivityLauncher;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
