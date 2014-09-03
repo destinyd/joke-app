@@ -82,7 +82,6 @@ public class FragmentList extends FragmentBase {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        Log.e(TAG, "onViewCreated");
         super.onViewCreated(view, savedInstanceState);
         if(adapter == null)
             refreshPage();
@@ -125,13 +124,10 @@ public class FragmentList extends FragmentBase {
                     page--;
                     list.set_on_load_more_listener(null);
                     Toast.makeText(activity, "没有数据了。", Toast.LENGTH_LONG);
-                    Log.e(TAG, "no more");
                 } else if (page == 1) {
                     refreshJokes(get_jokes);
-                    Log.e(TAG, "refreshJokes");
                 } else {
                     addJokes(get_jokes);
-                    Log.e(TAG, "addJokes");
                 }
                 return true;
             }
@@ -140,12 +136,10 @@ public class FragmentList extends FragmentBase {
             protected void onException(Exception e) throws RuntimeException {
                 e.printStackTrace();
                 Toast.makeText(activity, "获取信息失败", Toast.LENGTH_LONG);
-                Log.e(TAG, "onException");
             }
 
             @Override
             public void onSuccess(Boolean relationship) {
-                Log.e(TAG, "onSuccess");
                 jokes_to_list();
             }
 
@@ -170,10 +164,6 @@ public class FragmentList extends FragmentBase {
     }
 
     public void onListItemClick(PLA_AdapterView l, View v, int position, long id) {
-        Log.d(TAG, "l:" + l.getClass().getName());
-        Log.d(TAG, "v:" + v.getClass().getName());
-        Log.d(TAG, "position:" + position);
-        Log.d(TAG, "id:" + id);
         Joke joke = ((Joke) l.getItemAtPosition(position));
         if (joke.isVideo() || joke.isLong())
             startActivity(new Intent(activity, ActiveWeb.class).putExtra(JOKE, joke));
@@ -184,7 +174,6 @@ public class FragmentList extends FragmentBase {
     }
 
     private void jokes_to_list() {
-        Log.e(TAG, "jokes_to_list");
         if (adapter == null) {
             adapter = new AdapterJokes(inflater, jokes);
             list.setAdapter(adapter);
