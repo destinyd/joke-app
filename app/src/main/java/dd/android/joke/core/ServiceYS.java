@@ -35,16 +35,12 @@ public class ServiceYS {
         }
     }
 
-    public static List<Joke> getJokes(String type, int page) throws IOException {
-        try {
+    public static List<Joke> getJokes(String type, int page) throws IOException, HttpRequest.HttpRequestException {
             String url = String.format(FORMAT_URL_JOKES, type, page);
             HttpRequest request = get(url);
             String body = request.body();
             List<Joke> response = JSON.parseArray(body, Joke.class);
             return response;
-        } catch (HttpRequest.HttpRequestException e) {
-            throw e.getCause();
-        }
     }
 
     private static String token() {

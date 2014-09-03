@@ -5,14 +5,14 @@
     <parent>
         <artifactId>parent</artifactId>
         <groupId>dd.android.joke</groupId>
-        <version>1.02</version>
+        <version>1.03</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>app</artifactId>
     <packaging>apk</packaging>
     <name>Joke app</name>
-    <version>1.02</version>
+    <version>1.03</version>
 
     <dependencies>
         <!--<dependency>-->
